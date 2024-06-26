@@ -12,7 +12,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 export default function ControlPanel() {
 
     {/* Datos de los elementos del Select */ }
-    let [selected, setSelected] = useState(-1)
+    let [/*selected*/, setSelected] = useState(-1)
     const descriptionRef = useRef<HTMLDivElement>(null);
     
     let items = [
