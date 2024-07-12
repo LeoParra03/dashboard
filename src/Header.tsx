@@ -1,6 +1,6 @@
-import React from 'react';
 
-function Header({ OpenSidebar }) {
+
+function Header() {
   return (
     <header className='header'>
       <div className='menu-icon'>

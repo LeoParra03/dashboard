@@ -1,12 +1,13 @@
-import React from 'react';
+
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import CloudIcon from '@mui/icons-material/Cloud';
 import MonitorIcon from '@mui/icons-material/Monitor';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-function Sidebar({ openSidebarToggle}) {
+function Sidebar() {
   return (
-    <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive" : ""}>
+    <aside id="sidebar">
       <div className='sidebar-title'>
         <div className='sidebar-brand'>
           ClimaticTime
@@ -15,13 +16,16 @@ function Sidebar({ openSidebarToggle}) {
       </div>
       <ul className='sidebar-list'>
         <li className='sidebar-list-item'>
-        <a href=""><ThermostatIcon className='icon'/>Indicadores</a>
+        <a href="#tiempo"><AccessTimeIcon className='icon'/>Tiempo</a>
         </li>
         <li className='sidebar-list-item'>
-          <a href=""><BarChartIcon className='icon'/>Grafico</a>
+        <a href="#indicadores"><ThermostatIcon className='icon'/>Indicadores</a>
         </li>
         <li className='sidebar-list-item'>
-          <a href=""><CloudIcon className='icon'/>Pronostico</a>
+          <a href="#graficos"><BarChartIcon className='icon'/>Grafico</a>
+        </li>
+        <li className='sidebar-list-item'>
+          <a href="#pronostico"><CloudIcon className='icon'/>Pronostico</a>
         </li>
         <li className='sidebar-list-item'>
           <a href=""><MonitorIcon className='icon'/>Monitoreo</a>

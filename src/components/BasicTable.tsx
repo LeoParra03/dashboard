@@ -6,84 +6,87 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
-/*
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-*/
-/*
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-*/
-{/* 3. Declare la interfaz del prop de entrada */ }
+export default function BasicTable() {
 
-interface Config {
-    rows: Array<object>;
-}
+  const [weatherData, setWeatherData] = useState([]);
 
-export default function BasicTable( data:Config) {
+  useEffect(() => {
 
-    {/* 
-         4. Declare la variable de estado (rows) y la función de actualización (setRows).
-         Use el mismo identificador de la variable con valores fijos (rows)
-     */}
+    (async () => {
 
-    let [rows, setRows] = useState([])
+        {/* Request */ }
 
-    {/* 
-         5. Agregue el hook useEffect, controlado por el prop del componente (data), y
-         Dentro del hook, invoque al métdo de actualización con el valor del prop (data.rows).
-     */}
+        let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088`)
+			  let savedTextXML = await response.text();
 
-    useEffect(() => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(savedTextXML, "application/xml");
+        let dataTable = new Array()
+        let time = xml.getElementsByTagName('time');
 
-        (() => {
+        for (let i = 0; i < 10; i++) {
+            const dia = time[i].getAttribute("from").split("T")[0]
+            const tiempo = time[i].getAttribute("from").split('T')[1] + '-' + time[i].getAttribute("to").split('T')[1]
 
-            setRows(data.rows)
+            //temperatura, precipitación, viento, humedad, presión atmosférica y nubosidad
+            let humidity = time[i].getElementsByTagName("humidity")[0]
+            let humidityValue = humidity.getAttribute("value")
 
-        })()
+            let windSpeed = time[i].getElementsByTagName("windSpeed")[0]
+            let windSpeedValue = windSpeed.getAttribute("mps")
 
-    }, [data])
+            let precipitation = time[i].getElementsByTagName("precipitation")[0]
+            let precipValue = (parseFloat(precipitation.getAttribute("probability"))*100).toFixed(2)+"%"
 
+            let temp= time[i].getElementsByTagName("temperature")[0]  
+            let valueTemp = temp.getAttribute("value")
 
-    {/* JSX */ }
-    return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Rango de horas</TableCell>
-                        <TableCell align="right">Dirección del viento</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow
-                            key={row.rangeHours}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.rangeHours}
-                            </TableCell>
-                            <TableCell align="right">{row.windDirection}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
+            let valueCelsius = `${parseFloat((parseFloat(valueTemp) - 273.15).toFixed(2))}°C`;
+            
+            let pressure = time[i].getElementsByTagName("pressure")[0]
+            let pressureValue = pressure.getAttribute("value")
+
+            let clouds = time[i].getElementsByTagName("clouds")[0]
+            let cloudValue = clouds.getAttribute("value")
+            dataTable.push({ dia, tiempo, humidityValue ,windSpeedValue, precipValue, valueCelsius, pressureValue, cloudValue})
+        }
+        setWeatherData(dataTable);
+    })()
+}, [])
+
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+          <TableCell>Día</TableCell>
+          <TableCell>Hora</TableCell>
+          <TableCell align="center">Humedad (%)</TableCell>
+          <TableCell align="center">Velocidad del Viento (m/s)</TableCell>
+          <TableCell align="center">Precipicación (%)</TableCell>
+          <TableCell align="center">Temperatura (°C)</TableCell>
+          <TableCell align="center">Presión (hPa)</TableCell>
+          <TableCell align="center">Nubosidad</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {weatherData.map((row,index) => (
+            <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">{row.dia}</TableCell>
+              <TableCell component="th" scope="row">{row.tiempo}</TableCell>
+              <TableCell align="right">{row.humidityValue}</TableCell>
+              <TableCell align="right">{row.windSpeedValue}</TableCell>
+              <TableCell align="right">{row.precipValue}</TableCell>  
+              <TableCell align="right">{row.valueCelsius}</TableCell>
+              <TableCell align="right">{row.pressureValue}</TableCell>
+              <TableCell align="right">{row.cloudValue}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
