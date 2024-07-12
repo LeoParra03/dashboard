@@ -40,3 +40,107 @@
 .read-the-docs {
   color: #888;
 }
+
+.grid-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+header {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+#sidebar {
+  width: 250px;
+  background-color: #222;
+  color: white;
+  position: fixed;
+  top: 56px; /* Ajusta esto si tu header tiene una altura diferente */
+  bottom: 0;
+  left: 0;
+  padding-top: 1rem;
+  transition: transform 0.3s ease;
+  z-index: 1000; /* Asegúrate de que el sidebar esté encima del contenido principal */
+}
+
+
+.sidebar.sidebar-responsive {
+  transform: translateX(0);
+}
+
+.sidebar:not(.sidebar-responsive) {
+  transform: translateX(-250px);
+}
+
+.main-container {
+  display: flex;
+  
+  flex: 1;
+  padding-top: 60px; /* Ajustar según la altura del header */
+}
+.main-content {
+  
+  flex: 1;
+  margin-left: 250px; /* Ajustar según el ancho del sidebar */
+  padding: 20px;
+  overflow-y: auto; /* Para que el contenido sea scrollable */
+  overflow-x: hidden; /* Evitar el scroll horizontal */
+  max-width: calc(100% - 250px); /* Ajustar según el ancho del sidebar */
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+
+.sidebar-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin-bottom: 1rem; /* Espaciado entre el título y la lista */
+}
+
+.sidebar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.sidebar-list {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el padding por defecto de la lista */
+  margin: 0; /* Elimina el margen por defecto de la lista */
+}
+.sidebar-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+.sidebar-list-item {
+  margin-bottom: 1rem; /* Espacio entre ítems de la lista, opcional */
+}
+
+.sidebar-list-item > a {
+  display: flex;
+  align-items: center; 
+  text-decoration: none;
+  color: #9e9ea4;
+  padding: 0.5rem 1rem;
+}
+.close_icon {
+  cursor: pointer;
+}
+
+.icon {
+  margin-right: 0.5rem; /* Espacio entre el ícono y el texto */
+}
+
