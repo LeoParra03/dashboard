@@ -1,7 +1,4 @@
 import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { CardActionArea } from '@mui/material';
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
