@@ -4,7 +4,7 @@ import { Chart } from "react-google-charts";
 
 const WeatherChart = ({ selectedVariable }) => {
     const [chartData, setChartData] = useState([]);
-   
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,7 +25,7 @@ const WeatherChart = ({ selectedVariable }) => {
 
                 Array.from(time).forEach(timeElement => {
                     const timeFrom = timeElement.getAttribute("from");
-                    
+
                     // Temperatura
                     let temperature = timeElement.getElementsByTagName("temperature")[0];
                     let temperatureValue = parseFloat(temperature.getAttribute("value"));
@@ -48,10 +48,10 @@ const WeatherChart = ({ selectedVariable }) => {
 
                     // Precipitación
                     let precipitation = timeElement.getElementsByTagName("precipitation")[0];
-                    if (precipitation) {
-                        let precipitationValue = parseFloat(precipitation.getAttribute("value"));
+                   
+                        let precipitationValue = parseFloat(precipitation.getAttribute("probability"));
                         precipitationData.push([new Date(timeFrom), precipitationValue]);
-                    }
+                    
                 });
 
                 // Establecer los datos según la variable seleccionada
@@ -80,9 +80,10 @@ const WeatherChart = ({ selectedVariable }) => {
                     case 3: // Temperatura
                         setChartData([['Fecha-Hora', 'Temperatura (°C)']].concat(temperatureData));
                         break;
-                    case 4: // Precipitación
-                        setChartData([['Fecha-Hora', 'Precipitación (mm)']].concat(precipitationData));
+                        case 4: // Precipitación
+                        setChartData([['Fecha-Hora', 'Precipitación (%)']].concat(precipitationData.map(([time, value]) => [time, value])));
                         break;
+                    
                     case 5: // Todas las variables
                         setChartData([
                             ['Fecha-Hora', 'Humedad (%)', 'Temperatura (°C)', 'Velocidad del viento (m/s)', 'Nubosidad', 'Precipitación (mm)']

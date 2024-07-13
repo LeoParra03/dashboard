@@ -3,6 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
 import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Unstable_Grid2';
 
 
 
@@ -47,21 +48,21 @@ export default function Summary(){
     }
 
     return (
-        <Card >
-            <CardActionArea>
+        <Grid container spacing={5}>
+            <Grid xs={12} sm={12} md={12} lg={12} className="Day">
                
-                <CardContent>
-                    <Typography gutterBottom component="h2" variant="h6" color="primary">
-                    {timeOfDay}
-                    </Typography>
-                    <Typography component="p" variant="h4">
-                    {formattedTime}
-                    </Typography>
-                    <Typography color="text.secondary" sx={{ flex: 1 }}>
-                    	en {formattedDate}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+            <Typography variant="h4" align="center">
+            <b>{timeOfDay}</b>
+        </Typography>
+               
+            </Grid>
+            <Grid xs={12} sm={12} md={12} lg={12} className="timedate">
+            <Typography variant="h5" align="center">
+          <b>Time:</b> {formattedTime} --- <b>Date:</b> {formattedDate}
+        </Typography>
+            </Grid>
+            
+           
+        </Grid>
     )
 }

@@ -50,7 +50,7 @@
 
 header {
   width: 100%;
-  background-color: #4e4ac6;
+  background-color: #5a56c3;
   color: white;
   padding: 1rem;
   text-align: center;
@@ -58,21 +58,52 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
+  font-size: 1rem;
 }
 
+/* Tarjetas */
+.card {
+  background-color: lightgray;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Contenedores */
+.main-container {
+  display: flex;
+  flex:1;
+  padding-top: 60px;
+ 
+}
+
+.main-content {
+  background-color: #8790c6;
+  flex: 1;
+  margin-left: 250px;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar */
 #sidebar {
   width: 250px;
   background-color: #222;
   color: white;
   position: fixed;
-  top: 56px; /* Ajusta esto si tu header tiene una altura diferente */
+  top: 56px;
   bottom: 0;
   left: 0;
   padding-top: 1rem;
   transition: transform 0.3s ease;
-  z-index: 1000; /* Asegúrate de que el sidebar esté encima del contenido principal */
+  z-index: 1000;
 }
-
 
 .sidebar.sidebar-responsive {
   transform: translateX(0);
@@ -80,24 +111,6 @@ header {
 
 .sidebar:not(.sidebar-responsive) {
   transform: translateX(-250px);
-}
-
-.main-container {
-  display: flex;
-  
-  flex: 1;
-  padding-top: 60px; /* Ajustar según la altura del header */
-}
-.main-content {
-  background-color: #a5a3d8;
-  flex: 1;
-  margin-left: 250px; /* Ajustar según el ancho del sidebar */
-  padding: 20px;
-  overflow-y: auto; /* Para que el contenido sea scrollable */
-  overflow-x: hidden; /* Evitar el scroll horizontal */
-  max-width: calc(100% - 250px); /* Ajustar según el ancho del sidebar */
-  display: flex;
-  flex-direction: column;
 }
 
 .menu-icon {
@@ -109,41 +122,60 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  margin-bottom: 1rem; /* Espaciado entre el título y la lista */
+  margin-bottom: 1rem;
 }
 
 .sidebar-brand {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
 .sidebar-list {
-  list-style-type: none; /* Elimina los puntos de la lista */
-  padding: 0; /* Elimina el padding por defecto de la lista */
-  margin: 0; /* Elimina el margen por defecto de la lista */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
+
 .sidebar-list-item:hover {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
-.sidebar-list-item {
-  margin-bottom: 1rem; /* Espacio entre ítems de la lista, opcional */
-}
 
 .sidebar-list-item > a {
   display: flex;
-  align-items: center; 
+  align-items: center;
   text-decoration: none;
   color: #9e9ea4;
-  padding: 0.5rem 1rem;
+  padding-left: 0.5rem ;
+  padding-right: 0.5rem ;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  
 }
+
 .close_icon {
   cursor: pointer;
 }
 
 .icon {
-  margin-right: 0.5rem; /* Espacio entre el ícono y el texto */
+  margin-right: 0.5rem;
 }
-.h2{
-  align-items:normal;
+.h2 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  text-align: left; /* Cambia el alineado a la izquierda */
 }
-
+.summary-card {
+  max-width: 700px; /* Ajusta el tamaño del summary */
+  margin: 0 auto; /* Centra el summary horizontalmente */
+}
+.indi {
+  max-width: 400px; /* Ajusta el tamaño del summary */
+  margin: 0 auto; /* Centra el summary horizontalmente */
+}
+.subtitu{
+  background-color: #8b96cb;
+}
+.summary{
+  text-align: center;
+}

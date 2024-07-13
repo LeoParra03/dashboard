@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className='header'>
       <div className='menu-icon'>
-        Dashboard de Ecuador
+        <b>Dashboard de Ecuador</b>
       </div>
     </header>
   );
